@@ -13,3 +13,4 @@
   tasks:
     - import_tasks: ../tasks/core-setup.yml
     - import_tasks: ../tasks/nvim-setup.yml
+    - import_tasks: ../tasks/tmux-setup.yml

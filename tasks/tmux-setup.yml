@@ -1,0 +1,4 @@
+- name: Install tpm
+  git:
+    repo: 'https://github.com/tmux-plugins/tpm'
+    dest: "{{ lookup('env','HOME') }}/.tmux/plugins/tpm"
