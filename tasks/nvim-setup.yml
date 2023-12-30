@@ -1,0 +1,37 @@
+- name: Check neovim installed
+  stat:
+    path: /usr/local/bin/nvim
+  register: nvim_stat
+
+- name: Check neovim version
+  shell: nvim -v | awk 'NR==1{print $2}'
+  register: nvim_version
+  when: nvim_stat.stat.exists
+
+- name: Neovim setup
+  vars:
+    nvim_download_dest: /tmp/neovim
+  block:
+
+    - name: Clone Neovim
+      git:
+        repo: 'https://github.com/neovim/neovim.git'
+        dest: "{{ nvim_download_dest }}"
+        version: "{{ neovim_version }}"
+
+    - name: Build neovim
+      shell:
+        cmd: make CMAKE_BUILD_TYPE=Release
+        chdir: "{{ nvim_download_dest }}"
+
+    - name: Install neovim
+      become: true
+      shell:
+        cmd: make install
+        chdir: "{{ nvim_download_dest }}"
+
+    - name: Cleanup neovim repo
+      shell: rm -rf "{{ nvim_download_dest }}"
+
+  when: not nvim_stat.stat.exists or neovim_version != nvim_version.stdout  
+
