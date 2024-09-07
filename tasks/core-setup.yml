@@ -6,12 +6,12 @@
 - name: Install System Packages 2
   become: true
   apt:
-    name: ["lua5.4", "clang", "unzip", "libtool", "libtool-bin", "gettext", "ccache", "ninja-build", "curl", "stow"]
+    name: ["lua5.4", "clang", "unzip", "libtool", "libtool-bin", "gettext", "ccache", "ninja-build", "curl"]
 
 - name: Install tools
   become: true
   apt:
-    name: ["fzf", "tmux"]
+    name: ["fzf", "tmux", "stow"]
 
 - name: Install deb tools
   become: true
