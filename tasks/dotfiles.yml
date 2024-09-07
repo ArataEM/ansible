@@ -1,0 +1,11 @@
+- name: Download dotfiles
+  vars:
+    dotfiles_repo: https://github.com/ArataEM/.dotfiles
+  git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "~/.dotfiles"
+
+- name: Install dotfiles with stow
+  shell:
+    cmd: stow .
+    chdir: ~/.dotfiles
