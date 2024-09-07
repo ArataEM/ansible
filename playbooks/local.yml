@@ -8,8 +8,13 @@
         update_cache: true
         state: present
   tasks:
-    - import_tasks: ../tasks/core-setup.yml
-    - import_tasks: ../tasks/nvim-setup.yml
-    - import_tasks: ../tasks/tmux-setup.yml
-    - import_tasks: ../tasks/zsh-setup.yml
+    - import_tasks: ../tasks/core.yml
+      tags: core
+    - import_tasks: ../tasks/nvim.yml
+      tags: nvim
+    - import_tasks: ../tasks/tmux.yml
+      tags: tmux
+    - import_tasks: ../tasks/zsh.yml
       tags: zsh
+    - import_tasks: ../tasks/dotfiles.yml
+      tags: dotfiles
