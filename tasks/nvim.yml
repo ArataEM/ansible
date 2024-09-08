@@ -34,4 +34,3 @@
       shell: rm -rf "{{ nvim_download_dest }}"
 
   when: not nvim_stat.stat.exists or neovim_version != nvim_version.stdout  
-

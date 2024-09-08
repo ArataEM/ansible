@@ -1,6 +1,8 @@
-- hosts: localhost
+- name: Local
+  hosts: localhost
   vars:
     neovim_version: v0.9.5
+    zsh_prompt: starship
   pre_tasks:
     - name: Update Apt
       become: true
