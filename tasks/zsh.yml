@@ -43,6 +43,6 @@
       register: star_stat
 
     - name: Starship
-      shell: curl -sS https://starship.rs/install.sh | sh
+      shell: curl -sS https://starship.rs/install.sh | sh -s -- -y
       when: not star_stat.stat.exists
   when: zsh_prompt == 'starship'
