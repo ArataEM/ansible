@@ -13,13 +13,13 @@
     name: "{{ ansible_user_id }}"
     shell: /bin/zsh
 
-- name: Check that the Oh-My-Zsh installed
-  stat:
-    path: ~/.oh-my-zsh
-  register: oh_my_stats
-
 - name: Install Oh-My-Zsh
   block:
+    - name: Check that the Oh-My-Zsh installed
+      stat:
+        path: ~/.oh-my-zsh
+      register: oh_my_stats
+
     - name: Oh-My-Zsh
       shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       when: not oh_my_stats.stat.exists
@@ -37,6 +37,12 @@
 
 - name: Install Starship
   block:
+    - name: Check Starship installed
+      stat:
+        path: /usr/local/bin/starship
+      register: star_stat
+
     - name: Starship
       shell: curl -sS https://starship.rs/install.sh | sh
+      when: not star_stat.stat.exists
   when: zsh_prompt == 'starship'
